@@ -69,6 +69,7 @@ const orderType = new GraphQLObjectType({
 });
 
 
+
 const schema = new GraphQLSchema({
     query: new GraphQLObjectType({
         name: 'Query',
@@ -82,8 +83,8 @@ const schema = new GraphQLSchema({
             },
             orderMine: {
                 args: {
-                    _id: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAt: { type: new GraphQLNonNull(GraphQLString) }
+                    id: { type: new GraphQLNonNull(GraphQLString) },
+                    dummy: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: new GraphQLList(orderType),
                 resolve: (parent, args) => orderMine(args)
@@ -101,8 +102,12 @@ const schema = new GraphQLSchema({
                 resolve: (parent, args) => tasks()
             },
             allUsers: {
+                args:{
+                    id: { type: new GraphQLNonNull(GraphQLString) },
+                    dummy: { type: new GraphQLNonNull(GraphQLString) }
+                },
                 type: new GraphQLList(userType),
-                resolve: (parent, args) => allUsers()
+                resolve: (parent, args) => allUsers(args)
             },
 
             user: {
@@ -115,11 +120,11 @@ const schema = new GraphQLSchema({
             },
             me: {
                 args: {
-                    userid: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAt: { type: new GraphQLNonNull(GraphQLString) }
+                    dummy: { type: new GraphQLNonNull(GraphQLString) },
+                    id: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: userType,
-                resolve: (parent, args) => me(args.userid, args.createdAt)
+                resolve: (parent, args) => me(args.dummy, args.id)
             },
             includedOrdermen: {
                 type: new GraphQLList(userType),
@@ -146,8 +151,8 @@ const schema = new GraphQLSchema({
         fields: {
             createOrder: {
                 args: {
-                    _id: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAt: { type: new GraphQLNonNull(GraphQLString) },
+                    dummy: { type: new GraphQLNonNull(GraphQLString) },
+                    id: { type: new GraphQLNonNull(GraphQLString) },
                     menu: { type: new GraphQLNonNull(GraphQLString) },
                     hi: { type: new GraphQLNonNull(GraphQLString) },
                 },
@@ -157,9 +162,7 @@ const schema = new GraphQLSchema({
             updateOrder: {
                 args: {
                     userid: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAtU: { type: new GraphQLNonNull(GraphQLString) },
                     orderid: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAtO: { type: new GraphQLNonNull(GraphQLString) },
                     menu: { type: new GraphQLNonNull(GraphQLString) },
                     hi: { type: new GraphQLNonNull(GraphQLString) },
                 },
@@ -168,16 +171,16 @@ const schema = new GraphQLSchema({
             },
             removeOrder: {
                 args: {
-                    _id: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAt: { type: new GraphQLNonNull(GraphQLString) }
+                    id: { type: new GraphQLNonNull(GraphQLString) },
+                    dummy: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: GraphQLString,
-                resolve: (parent, args) => removeOrder(args._id, args.createdAt)
+                resolve: (parent, args) => removeOrder(args.id, args.dummy)
             },
             giveupOrder: {
                 args: {
                     userid: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAt: { type: new GraphQLNonNull(GraphQLString) }
+                    dummy: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: GraphQLString,
                 resolve: (parent, args) => giveupOrder(args)
@@ -189,7 +192,6 @@ const schema = new GraphQLSchema({
             createTask: {
                 args: {
                     userid: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAt: { type: new GraphQLNonNull(GraphQLString) },
                     title: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: taskType,
@@ -197,8 +199,7 @@ const schema = new GraphQLSchema({
             },
             updateTask: {
                 args: {
-                    _id: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAt: { type: new GraphQLNonNull(GraphQLString) },
+                    id: { type: new GraphQLNonNull(GraphQLString) },
                     title: { type: new GraphQLNonNull(GraphQLString) },
                 },
                 type: taskType,
@@ -206,10 +207,8 @@ const schema = new GraphQLSchema({
             },
             removeTask: {
                 args: {
-                    _id: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAtT: { type: new GraphQLNonNull(GraphQLString) },
+                    id: { type: new GraphQLNonNull(GraphQLString) },
                     userid: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAtU: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: GraphQLString,
                 resolve: (parent, args) => removeTask(args)
@@ -224,44 +223,43 @@ const schema = new GraphQLSchema({
             },
             updatePosition: {
                 args: {
-                    ids: { type: new GraphQLList(GraphQLString) },
-                    createdAts: { type: new GraphQLList(GraphQLString) }
+                    ids: { type: new GraphQLList(GraphQLString) }
+                    
                 },
                 type: GraphQLString,
-                resolve: (parent, args) => updatePosition(args.ids, args.createdAts)
+                resolve: (parent, args) => updatePosition(args.ids)
             },
             updateUser: {
                 args: {
-                    _id: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAt: { type: new GraphQLNonNull(GraphQLString) },
+                    dummy: { type: new GraphQLNonNull(GraphQLString) },
+                    id: { type: new GraphQLNonNull(GraphQLString) },
                     username: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: GraphQLString,
-                resolve: (parent, args) => updateUser(args._id, args.createdAt, args.username)
+                resolve: (parent, args) => updateUser(args.dummy, args.id, args.username)
             },
             getbackUser: {
                 args: {
                     ids: { type: new GraphQLList(GraphQLString) },
-                    createdAts: { type: new GraphQLList(GraphQLString) }
                 },
                 type: GraphQLString,
-                resolve: (parent, args) => getbackUser(args.ids, args.createdAts)
+                resolve: (parent, args) => getbackUser(args.ids)
             },
             getbackStatus: {
                 args: {
-                    _id: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAt: { type: new GraphQLNonNull(GraphQLString) }
+                    id: { type: new GraphQLNonNull(GraphQLString) },
+                    dummy: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: GraphQLString,
-                resolve: (parent, args) => getbackStatus(args._id, args.createdAt)
+                resolve: (parent, args) => getbackStatus(args.id, args.dummy)
             },
             deleteUser: {
                 args: {
-                    _id: { type: new GraphQLNonNull(GraphQLString) },
-                    createdAt: { type: new GraphQLNonNull(GraphQLString) }
+                    id: { type: new GraphQLNonNull(GraphQLString) },
+                    dummy: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: GraphQLString,
-                resolve: (parent, args) => deleteUser(args._id, args.createdAt)
+                resolve: (parent, args) => deleteUser(args.id, args.dummy)
             },
 
         }

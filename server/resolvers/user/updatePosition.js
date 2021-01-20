@@ -1,11 +1,11 @@
 'use strict';
 
 const User = require('../../model/user');
-module.exports = async (ids,createdAts) => {
+module.exports = async (ids) => {
     for (let i = 0; i < ids.length; i++) {
         const id = ids[i]
-        const createdAt = createdAts[i]
-        const result = await User.update({"id":id,"createdAt":createdAt,"posit":"휴가자"});
+        const dummy = "유저"
+        const result = await User.update({"dummy":dummy,"id":id,"posit":"휴가자"});
         console.log(result)
         
     }

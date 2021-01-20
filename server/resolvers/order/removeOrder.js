@@ -1,11 +1,9 @@
 'use strict';
 
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const Order = require('../../model/order');
-module.exports = async (id, createdAt) => {
+module.exports = async (id, dummy) => {
    
-    const result = await Order.delete({id,createdAt})
+    const result = await Order.delete({id,dummy})
     console.log(result)
     return "주문이 삭제 되었습니다."
 };

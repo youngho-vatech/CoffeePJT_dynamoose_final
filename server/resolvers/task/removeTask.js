@@ -4,15 +4,15 @@ const Task = require('../../model/task');
 const User = require('../../model/user');
 
 module.exports = async(data) => {
-    let id = data._id
-    let createdAt = data.createdAtT
+    let id = data.id
+    let dummy = "게시글"
     
-    await Task.delete({id,createdAt})
+    await Task.delete({id,dummy})
 
     id = data.userid
-    createdAt = data.createdAtU
+    dummy = "유저"
     
-    await User.update({"id":id,"createdAt":createdAt,"posit":"주문자"})
+    await User.update({"id":id,"dummy":dummy},{"posit":"주문자","stat":"대기중"})
 
 
     return "게시글이 삭제 되었습니다."

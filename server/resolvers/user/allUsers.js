@@ -2,13 +2,12 @@
 const User = require("../../model/user")
 
 
-module.exports = async() => {
-    const lastKey={
-        id: '377795c0-5928-11eb-8742-c78a85d8788e',
-        createdAt: '1610931482908'
-      }
-    const result = await User.scan().startAt(lastKey).limit(5).exec()
-    console.log(result)
-    return result
+module.exports = async(lastKey) => {
+    // const lastKey={
+    //     username: '양씨',
+    //     dummy: '유저'
+    //   }
+    if(lastKey.id == "") return await User.query("dummy").eq("유저").limit(5).sort().using("username_index").exec()
+    return await User.query("dummy").eq("유저").startAt(lastKey).limit(5).exec()
 }
     

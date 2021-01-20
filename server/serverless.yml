@@ -44,6 +44,8 @@ resources:
           Properties:
             TableName: test00_users
             AttributeDefinitions:
+              - AttributeName: dummy
+                AttributeType: S
               - AttributeName: id
                 AttributeType: S
               - AttributeName: createdAt
@@ -55,29 +57,35 @@ resources:
               - AttributeName: username
                 AttributeType: S
             KeySchema:
-              - AttributeName: id
+              - AttributeName: dummy
                 KeyType: HASH
-              - AttributeName: createdAt
+              - AttributeName: id
                 KeyType: RANGE
             ProvisionedThroughput:
               ReadCapacityUnits: 5
               WriteCapacityUnits: 5
             LocalSecondaryIndexes:
+              - IndexName: createdAt_index
+                KeySchema:
+                - AttributeName: dummy
+                  KeyType: HASH
+                - AttributeName: createdAt
+                  KeyType: RANGE
               - IndexName: username_index
                 KeySchema:
-                - AttributeName: id
+                - AttributeName: dummy
                   KeyType: HASH
                 - AttributeName: username
                   KeyType: RANGE
               - IndexName: stat_index
                 KeySchema:
-                - AttributeName: id
+                - AttributeName: dummy
                   KeyType: HASH
                 - AttributeName: stat
                   KeyType: RANGE
               - IndexName: posit_index
                 KeySchema:
-                - AttributeName: id
+                - AttributeName: dummy
                   KeyType: HASH
                 - AttributeName: posit
                   KeyType: RANGE  
@@ -87,6 +95,8 @@ resources:
           Properties:
             TableName: test00_orders
             AttributeDefinitions:
+              - AttributeName: dummy
+                AttributeType: S
               - AttributeName: id
                 AttributeType: S
               - AttributeName: createdAt
@@ -98,29 +108,35 @@ resources:
               - AttributeName: hi
                 AttributeType: S
             KeySchema:
-              - AttributeName: id
+              - AttributeName: dummy
                 KeyType: HASH
-              - AttributeName: createdAt
+              - AttributeName: id
                 KeyType: RANGE
             ProvisionedThroughput:
               ReadCapacityUnits: 5
               WriteCapacityUnits: 5
             LocalSecondaryIndexes:
+              - IndexName: createdAt_index
+                KeySchema:
+                - AttributeName: dummy
+                  KeyType: HASH
+                - AttributeName: createdAt
+                  KeyType: RANGE
               - IndexName: username_index
                 KeySchema:
-                - AttributeName: id
+                - AttributeName: dummy
                   KeyType: HASH
                 - AttributeName: username
                   KeyType: RANGE
               - IndexName: menu_index
                 KeySchema:
-                - AttributeName: id
+                - AttributeName: dummy
                   KeyType: HASH
                 - AttributeName: menu
                   KeyType: RANGE
               - IndexName: hi_index
                 KeySchema:
-                - AttributeName: id
+                - AttributeName: dummy
                   KeyType: HASH
                 - AttributeName: hi
                   KeyType: RANGE  
@@ -130,6 +146,8 @@ resources:
           Properties:
             TableName: test00_tasks
             AttributeDefinitions:
+              - AttributeName: dummy
+                AttributeType: S
               - AttributeName: id
                 AttributeType: S
               - AttributeName: createdAt
@@ -139,28 +157,34 @@ resources:
               - AttributeName: title
                 AttributeType: S
             KeySchema:
+              - AttributeName: dummy
+                KeyType: HASH
               - AttributeName: id
-                KeyType: HASH
-              - AttributeName: createdAt
-                KeyType: HASH
+                KeyType: RANGE
             ProvisionedThroughput:
               ReadCapacityUnits: 5
               WriteCapacityUnits: 5
             LocalSecondaryIndexes:
+              - IndexName: createdAt_index
+                KeySchema:
+                - AttributeName: dummy
+                  KeyType: HASH
+                - AttributeName: createdAt
+                  KeyType: RANGE
               - IndexName: creater_index
                 KeySchema:
-                - AttributeName: id
+                - AttributeName: dummy
                   KeyType: HASH
                 - AttributeName: creater
                   KeyType: RANGE
               - IndexName: title_index
                 KeySchema:
-                - AttributeName: id
+                - AttributeName: dummy
                   KeyType: HASH
                 - AttributeName: title
                   KeyType: RANGE
             ProjectionType: ALL
-       
+        
 plugins:
   - serverless-offline
 custom:

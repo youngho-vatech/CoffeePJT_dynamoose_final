@@ -1,7 +1,5 @@
 'use strict';
 
-const AWS = require('aws-sdk');
-const dynamoDb = new AWS.DynamoDB.DocumentClient();
 const Order = require('../../model/order');
 const User = require('../../model/user');
 const Task = require('../../model/task');

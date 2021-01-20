@@ -4,9 +4,14 @@ const {Schema} = dynamoose;            // 스키마라는 개념을 넣어서 �
 // 정형화된 스키마를 선언하는 부분 -> spring model과 비슷하다 생각하면 됨
 const User = dynamoose.model('test00_users', {
     
-    "id": {
+    dummy: {
         "type": String,
         "hashKey": true,
+        "index": {
+            "name": "createdAt_index",
+            "rangeKey": "createdAt",
+            "throughput": {"read": 5, "write": 5}
+        },
         "index": {
             "name": "username_index",
             "rangeKey": "username",
@@ -18,16 +23,16 @@ const User = dynamoose.model('test00_users', {
             "throughput": {"read": 5, "write": 5}
         },
         "index": {
-            "name": "stat_index",
-            "rangeKey": "stat",
+            "name": "posit_index",
+            "rangeKey": "posit",
             "throughput": {"read": 5, "write": 5}
         }
     },
-    "createdAt":{
+    id:{
         "type":String,
         "rangeKey":true
     },
-    
+    createdAt:String,
     username: String,
     stat: String,
     posit:String
