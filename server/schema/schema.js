@@ -37,11 +37,11 @@ const getbackUser = require('../resolvers/user/getbackUser')
 const getbackStatus = require('../resolvers/user/getbackStatus')
 const deleteUser = require('../resolvers/user/deleteUser');
 const howmany = require('../resolvers/user/howmany');
-
+const receiptUser = require('../resolvers/user/receiptUser');
 const userType = new GraphQLObjectType({
     name: 'User',
     fields: {
-        id: { type: new GraphQLNonNull(GraphQLString) },
+        _id: { type: new GraphQLNonNull(GraphQLString) },
         username: { type: new GraphQLNonNull(GraphQLString) },
         stat: { type: new GraphQLNonNull(GraphQLString) },
         posit: { type: new GraphQLNonNull(GraphQLString) },
@@ -51,7 +51,7 @@ const userType = new GraphQLObjectType({
 const taskType = new GraphQLObjectType({
     name: 'Task',
     fields: {
-        id: { type: new GraphQLNonNull(GraphQLString) },
+        _id: { type: new GraphQLNonNull(GraphQLString) },
         creater: { type: new GraphQLNonNull(GraphQLString) },
         title: { type: new GraphQLNonNull(GraphQLString) },
         createdAt: { type: new GraphQLNonNull(GraphQLString) },
@@ -60,7 +60,7 @@ const taskType = new GraphQLObjectType({
 const orderType = new GraphQLObjectType({
     name: 'Order',
     fields: {
-        id: { type: new GraphQLNonNull(GraphQLString) },
+        _id: { type: new GraphQLNonNull(GraphQLString) },
         menu: { type: new GraphQLNonNull(GraphQLString) },
         hi: { type: new GraphQLNonNull(GraphQLString) },
         username: { type: new GraphQLNonNull(GraphQLString) },
@@ -83,8 +83,7 @@ const schema = new GraphQLSchema({
             },
             orderMine: {
                 args: {
-                    id: { type: new GraphQLNonNull(GraphQLString) },
-                    dummy: { type: new GraphQLNonNull(GraphQLString) }
+                    _id: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: new GraphQLList(orderType),
                 resolve: (parent, args) => orderMine(args)
@@ -102,12 +101,8 @@ const schema = new GraphQLSchema({
                 resolve: (parent, args) => tasks()
             },
             allUsers: {
-                args:{
-                    id: { type: new GraphQLNonNull(GraphQLString) },
-                    dummy: { type: new GraphQLNonNull(GraphQLString) }
-                },
                 type: new GraphQLList(userType),
-                resolve: (parent, args) => allUsers(args)
+                resolve: (parent, args) => allUsers()
             },
 
             user: {
@@ -120,11 +115,10 @@ const schema = new GraphQLSchema({
             },
             me: {
                 args: {
-                    dummy: { type: new GraphQLNonNull(GraphQLString) },
-                    id: { type: new GraphQLNonNull(GraphQLString) }
+                    _id: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: userType,
-                resolve: (parent, args) => me(args.dummy, args.id)
+                resolve: (parent, args) => me(args._id)
             },
             includedOrdermen: {
                 type: new GraphQLList(userType),
@@ -141,6 +135,13 @@ const schema = new GraphQLSchema({
             howmany: {
                 type: new GraphQLList(GraphQLInt),
                 resolve: (parent, args) => howmany()
+            },
+            receiptUser:{
+                args: {
+                    cmenu: { type: new GraphQLNonNull(GraphQLInt) }
+                },
+                type: GraphQLString,
+                resolve: (parent, args) => receiptUser(args.cmenu)
             }
 
         }
@@ -151,8 +152,7 @@ const schema = new GraphQLSchema({
         fields: {
             createOrder: {
                 args: {
-                    dummy: { type: new GraphQLNonNull(GraphQLString) },
-                    id: { type: new GraphQLNonNull(GraphQLString) },
+                    _id: { type: new GraphQLNonNull(GraphQLString) },
                     menu: { type: new GraphQLNonNull(GraphQLString) },
                     hi: { type: new GraphQLNonNull(GraphQLString) },
                 },
@@ -171,16 +171,15 @@ const schema = new GraphQLSchema({
             },
             removeOrder: {
                 args: {
-                    id: { type: new GraphQLNonNull(GraphQLString) },
-                    dummy: { type: new GraphQLNonNull(GraphQLString) }
+                    userid: { type: new GraphQLNonNull(GraphQLString) },
+                    orderid: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: GraphQLString,
-                resolve: (parent, args) => removeOrder(args.id, args.dummy)
+                resolve: (parent, args) => removeOrder(args.userid, args.orderid)
             },
             giveupOrder: {
                 args: {
-                    userid: { type: new GraphQLNonNull(GraphQLString) },
-                    dummy: { type: new GraphQLNonNull(GraphQLString) }
+                    userid: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: GraphQLString,
                 resolve: (parent, args) => giveupOrder(args)
@@ -199,7 +198,7 @@ const schema = new GraphQLSchema({
             },
             updateTask: {
                 args: {
-                    id: { type: new GraphQLNonNull(GraphQLString) },
+                    _id: { type: new GraphQLNonNull(GraphQLString) },
                     title: { type: new GraphQLNonNull(GraphQLString) },
                 },
                 type: taskType,
@@ -207,7 +206,7 @@ const schema = new GraphQLSchema({
             },
             removeTask: {
                 args: {
-                    id: { type: new GraphQLNonNull(GraphQLString) },
+                    _id: { type: new GraphQLNonNull(GraphQLString) },
                     userid: { type: new GraphQLNonNull(GraphQLString) },
                 },
                 type: GraphQLString,
@@ -231,12 +230,11 @@ const schema = new GraphQLSchema({
             },
             updateUser: {
                 args: {
-                    dummy: { type: new GraphQLNonNull(GraphQLString) },
-                    id: { type: new GraphQLNonNull(GraphQLString) },
+                    _id: { type: new GraphQLNonNull(GraphQLString) },
                     username: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: GraphQLString,
-                resolve: (parent, args) => updateUser(args.dummy, args.id, args.username)
+                resolve: (parent, args) => updateUser(args.dummy, args._id, args.username)
             },
             getbackUser: {
                 args: {
@@ -247,19 +245,17 @@ const schema = new GraphQLSchema({
             },
             getbackStatus: {
                 args: {
-                    id: { type: new GraphQLNonNull(GraphQLString) },
-                    dummy: { type: new GraphQLNonNull(GraphQLString) }
+                    _id: { type: new GraphQLNonNull(GraphQLString) },
                 },
                 type: GraphQLString,
-                resolve: (parent, args) => getbackStatus(args.id, args.dummy)
+                resolve: (parent, args) => getbackStatus(args._id)
             },
             deleteUser: {
                 args: {
-                    id: { type: new GraphQLNonNull(GraphQLString) },
-                    dummy: { type: new GraphQLNonNull(GraphQLString) }
+                    ids: { type: new GraphQLList(GraphQLString) }
                 },
                 type: GraphQLString,
-                resolve: (parent, args) => deleteUser(args.id, args.dummy)
+                resolve: (parent, args) => deleteUser(args.ids)
             },
 
         }

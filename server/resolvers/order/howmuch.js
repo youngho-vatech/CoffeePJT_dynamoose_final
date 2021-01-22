@@ -2,7 +2,7 @@
 
 const Order = require('../../model/order');
 module.exports = async () => {
-    const orders = await Order.scan().exec();
+    const orders = await Order.query("dummy").eq("주문");
     let sum = 0
     console.log(orders)
     for (let i = 0; i < orders.length; i++) {

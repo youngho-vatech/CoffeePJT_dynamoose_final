@@ -46,7 +46,7 @@ resources:
             AttributeDefinitions:
               - AttributeName: dummy
                 AttributeType: S
-              - AttributeName: id
+              - AttributeName: _id
                 AttributeType: S
               - AttributeName: createdAt
                 AttributeType: S
@@ -59,7 +59,7 @@ resources:
             KeySchema:
               - AttributeName: dummy
                 KeyType: HASH
-              - AttributeName: id
+              - AttributeName: _id
                 KeyType: RANGE
             ProvisionedThroughput:
               ReadCapacityUnits: 5
@@ -97,7 +97,7 @@ resources:
             AttributeDefinitions:
               - AttributeName: dummy
                 AttributeType: S
-              - AttributeName: id
+              - AttributeName: _id
                 AttributeType: S
               - AttributeName: createdAt
                 AttributeType: S
@@ -110,7 +110,7 @@ resources:
             KeySchema:
               - AttributeName: dummy
                 KeyType: HASH
-              - AttributeName: id
+              - AttributeName: _id
                 KeyType: RANGE
             ProvisionedThroughput:
               ReadCapacityUnits: 5
@@ -148,7 +148,7 @@ resources:
             AttributeDefinitions:
               - AttributeName: dummy
                 AttributeType: S
-              - AttributeName: id
+              - AttributeName: _id
                 AttributeType: S
               - AttributeName: createdAt
                 AttributeType: S
@@ -159,7 +159,7 @@ resources:
             KeySchema:
               - AttributeName: dummy
                 KeyType: HASH
-              - AttributeName: id
+              - AttributeName: _id
                 KeyType: RANGE
             ProvisionedThroughput:
               ReadCapacityUnits: 5
@@ -189,4 +189,4 @@ plugins:
   - serverless-offline
 custom:
   serverless-offline:
-    httpPort: 8000
+    httpPort: 4000

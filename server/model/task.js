@@ -22,7 +22,7 @@ const Task = dynamoose.model('test00_tasks', {
             "throughput": {"read": 5, "write": 5}
         }
     },
-    id:{
+    _id:{
         "type":String,
         "rangeKey":true
     },

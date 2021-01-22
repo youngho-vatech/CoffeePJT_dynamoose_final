@@ -9,7 +9,7 @@ module.exports = async(data) => {
         username: data.username,
         stat: "대기중",
         posit: "주문자",
-        id: uuid.v1(),
+        _id: uuid.v1(),
         createdAt: String(Date.now())
     })
     

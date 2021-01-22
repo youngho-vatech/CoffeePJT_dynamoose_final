@@ -8,19 +8,19 @@ module.exports = async (data) => {
     
     if (isthere.count != 0) return "이미 진행중인 주문이 있습니다."
 
-    const id = data.userid
+    const _id = data.userid
     const dummy = "유저"
 
-    const up = await User.update({"id":id,"dummy":dummy,"posit":"결제자"});
+    const up = await User.update({"_id":_id,"dummy":dummy,"posit":"결제자"});
     
-    const user = await User.get({ id, dummy })
+    const user = await User.get({ _id, dummy })
     const creater = user.username
     
     const myTask = new Task({
         dummy:"게시글",
         creater: creater,
         title: data.title,
-        id: uuid.v1(),
+        _id: uuid.v1(),
         createdAt: String(Date.now()),
     });
     return await myTask.save()
