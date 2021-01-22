@@ -48,7 +48,7 @@ function SidebarComponent() {
 
     useEffect(() => {
         if (data) {
-            setUser(data.me.position);
+            setUser(data.me.posit);
 
         }
     }, [data]);

@@ -84,7 +84,7 @@ export default function MenuBoard() {
 
     useEffect(() => {
         if (data) {
-            setStatus(data.me.status);
+            setStatus(data.me.stat);
         }
     }, [data]);
 

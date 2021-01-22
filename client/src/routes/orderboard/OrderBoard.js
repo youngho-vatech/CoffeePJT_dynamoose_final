@@ -56,7 +56,7 @@ export default function CorderBoard() {
 
     useEffect(() => {
         if (data) {
-            setStatus(data.me.status);
+            setStatus(data.me.stat);
         }
     }, [data]);
 

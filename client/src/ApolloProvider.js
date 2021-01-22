@@ -12,7 +12,7 @@ import './index.css';
 
 
 const httpLink = createHttpLink({
-    uri: 'http://localhost:4000/graphql'
+    uri: 'http://localhost:4000/dev/graphql'
 });
 
 const authMiddleware = (AuthToken) =>
