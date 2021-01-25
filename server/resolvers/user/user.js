@@ -2,10 +2,10 @@
 
 const User = require('../../model/user');
 module.exports = async (word, category) => {
-    
-        if (word == "") return null
+        let result = []
+        if (word == "") return result
         // const result = await User.query("dummy").eq("유저").where("username").contains(word).sort().using("username_index").exec() // 안되네,,
-        const result = await User.scan({ "username": { "contains": word }}).using("username_index").exec()
+        result = await User.scan({ "username": { "contains": word }}).using("username_index").exec()
         console.log(result)
         return result
     

@@ -33,6 +33,12 @@ functions:
           USER_TABLE: test00_users
           ORDER_TABLE: test00_orders
           TASK_TABLE : test00_tasks
+      playground:
+        handler: handler/handler.queryhandler
+        events:
+        - http:
+            path: playground
+            method: get
       
        
           
@@ -186,7 +192,11 @@ resources:
             ProjectionType: ALL
         
 plugins:
+  - serverless-webpack
   - serverless-offline
 custom:
   serverless-offline:
     httpPort: 4000
+  webpack:
+    webpackConfig: ./webpack.config.js
+    includeModules: true

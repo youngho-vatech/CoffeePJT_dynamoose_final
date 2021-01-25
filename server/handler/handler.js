@@ -1,13 +1,20 @@
-'use strict';
+const express = require ("express");
+const serverless = require("serverless-http");
+const graphiql = require("graphql-playground-middleware-express");
+const { ApolloServer, gql }= require ("apollo-server-express");
+const schema = require("../schema/schema")
 
-    const { graphql } = require('graphql');
-    const schema = require('../schema/schema');
-    
-    module.exports.queryhandler = (event, context, callback) => {
-        graphql(schema, event.body)
-            .then(result => callback(null, {statusCode: 200, headers: {
-                'Access-Control-Allow-Origin': '*',
-                'Access-Control-Allow-Credentials': true,
-              }, body: JSON.stringify(result)}))
-            .catch(callback);
-    };
+const app = express();
+
+const server = new ApolloServer({
+  schema,
+  path: "/graphql"
+});
+
+server.applyMiddleware({ app });
+
+
+
+const queryhandler = serverless(app);
+console.log(queryhandler)
+export { queryhandler };
