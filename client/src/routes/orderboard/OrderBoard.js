@@ -177,7 +177,7 @@ export default function CorderBoard() {
 
                 </Grid>
 
-                {stat === "대기중" && (
+                {status === "대기중" && (
                     <GiveupButton userid={localStorage.getItem("myData")}/>
                 )}
 
