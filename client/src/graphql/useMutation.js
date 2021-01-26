@@ -46,18 +46,19 @@ export function CreateOrder(hi) {
     const createmutation = CreateMutation;
     console.log(hi)
     const [create] = useMutation(createmutation, {
-            refetchQueries: [{query: OrderSearch, variables: {id: localStorage.getItem('myData')}}
-                , {query: MeQuery, variables: {userid: localStorage.getItem('myData')}},
+            refetchQueries: [{query: OrderSearch, variables: {id: String(localStorage.getItem('myData'))}}
+                , {query: MeQuery, variables: {userid: String(localStorage.getItem('myData'))}},
                 {query: Receipt}, {query: CountQuery}, {query: NotQuery}],
             variables: {
-                id: localStorage.getItem('myData'),
+                id: String(localStorage.getItem('myData')),
                 menu: hi.menu,
                 hi: hi.hi
             },
             onCompleted: () => {
+                console.log(hi)
             },
             onError: () => {
-                alert("메뉴를 선택해주세요.")
+                alert("typeof(localStorage.getItem('myData'))")
             },
         }
     )

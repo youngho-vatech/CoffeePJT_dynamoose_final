@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 export default function EtcBoard() {
     const classes = useStyles();
     const [contents, setContents] = useState('');
-    const [stat, setStatus] = useState();
+    const [status, setStatus] = useState();
 
     const {data} = useQuery(TaskQuery);
     useEffect(() => {

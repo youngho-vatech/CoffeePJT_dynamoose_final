@@ -16,10 +16,10 @@ module.exports = async (data) => {
             menu: data.menu,
             hi: data.hi,
             username: user.username,
-            _id: uuid.v1(),
+            _id: String(uuid.v1()),
             createdAt: String(Date.now()),
         })
     const result = await myOrder.save()
-    console.log(result, "createOrder")
+    console.log(result, "createOrderssssss")
     return result
 };

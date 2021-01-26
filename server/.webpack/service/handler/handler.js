@@ -17200,7 +17200,6 @@ server.applyMiddleware({
   app
 });
 const queryhandler = serverless(app);
-console.log(queryhandler);
 
 
 /***/ }),
@@ -17477,7 +17476,7 @@ module.exports = async data => {
     menu: data.menu,
     hi: data.hi,
     username: user.username,
-    _id: uuid.v1(),
+    _id: String(uuid.v1()),
     createdAt: String(Date.now())
   });
   const result = await myOrder.save();
@@ -17812,7 +17811,7 @@ module.exports = async data => {
     dummy: "게시글",
     creater: creater,
     title: data.title,
-    _id: uuid.v1(),
+    _id: String(uuid.v1()),
     createdAt: String(Date.now())
   });
   console.log("createTask");
@@ -18357,9 +18356,11 @@ module.exports = async data => {
     username: data.username,
     stat: "대기중",
     posit: "주문자",
-    _id: uuid.v1(),
+    _id: String(uuid.v1()),
     createdAt: String(Date.now())
   });
+  console.log(myUser._id);
+  console.log(typeof myUser._id);
   console.log("registerUser");
   return await myUser.save();
 };

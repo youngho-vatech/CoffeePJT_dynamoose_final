@@ -16,5 +16,5 @@ server.applyMiddleware({ app });
 
 
 const queryhandler = serverless(app);
-console.log(queryhandler)
+
 export { queryhandler };

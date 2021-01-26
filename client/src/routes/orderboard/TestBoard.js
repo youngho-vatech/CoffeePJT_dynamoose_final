@@ -44,7 +44,7 @@ export default function TestBoard() {
 
     const theme = useTheme();
     const classes = useStyles({theme});
-    const [stat, setStatus] = useState();
+    const [status, setStatus] = useState();
 
 
     const {data} = useQuery(MeQuery, {

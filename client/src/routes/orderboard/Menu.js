@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuBoard() {
     const classes = useStyles();
     const [value, setValue] = React.useState('one');
-    const [stat, setStatus] = useState();
+    const [status, setStatus] = useState();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);

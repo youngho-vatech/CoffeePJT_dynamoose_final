@@ -44,7 +44,7 @@ export default function CorderBoard() {
 
     const theme = useTheme();
     const classes = useStyles({theme});
-    const [stat, setStatus] = useState();
+    const [status, setStatus] = useState();
 
 
     const {data} = useQuery(MeQuery, {
@@ -52,11 +52,10 @@ export default function CorderBoard() {
             userid: localStorage.getItem('myData')
         }
     });
-
+    console.log(data)
 
     useEffect(() => {
         if (data) {
-            console.log(data.me.stat)
             setStatus(data.me.stat);
         }
     }, [data]);

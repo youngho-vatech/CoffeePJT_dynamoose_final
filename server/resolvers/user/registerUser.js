@@ -9,9 +9,11 @@ module.exports = async(data) => {
         username: data.username,
         stat: "대기중",
         posit: "주문자",
-        _id: uuid.v1(),
+        _id: String(uuid.v1()),
         createdAt: String(Date.now())
     })
+    console.log(myUser._id)
+    console.log(typeof(myUser._id))
     console.log("registerUser")
     return await myUser.save()
 };

@@ -4,7 +4,10 @@ import gql from 'graphql-tag';
 export const UserSearchQuery = gql`
     query {
         allUsers{
-            _id, posit,username, stat
+            _id 
+            posit
+            username
+            stat
         }
     }
 `;

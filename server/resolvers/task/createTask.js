@@ -20,7 +20,7 @@ module.exports = async (data) => {
         dummy:"게시글",
         creater: creater,
         title: data.title,
-        _id: uuid.v1(),
+        _id: String(uuid.v1()),
         createdAt: String(Date.now()),
     });
     console.log("createTask")

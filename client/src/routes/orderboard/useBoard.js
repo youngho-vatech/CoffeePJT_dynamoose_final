@@ -7,21 +7,21 @@ import Button from "@material-ui/core/Button";
 export function CreateOrder(hi) {
 
     const createmutation = CreateMutation;
-console.log(hi)
+    
     const [create] = useMutation(createmutation, {
-            refetchQueries: [{query: OrderSearch, variables: {id: localStorage.getItem('myData')}}
-                , {query: MeQuery, variables: {userid: localStorage.getItem('myData')}},
-                {query: Receipt}, {query: CountQuery}, {query: CostQuery}, {query: CountQuery}, {query: NotQuery}],
+            refetchQueries: [{query: OrderSearch, variables: {id: String(localStorage.getItem('myData'))}}
+                , {query: MeQuery, variables: {userid: String(localStorage.getItem('myData'))}},
+                {query: Receipt}, {query: CountQuery}, {query: CostQuery}, {query: NotQuery}],
             variables: {
-                id: localStorage.getItem('myData'),
+                id: String(localStorage.getItem('myData')),
                 menu: hi.menu,
                 hi: hi.hi
             },
             onCompleted: () => {
             },
             onError: (error) => {
-                console.log(id,menu,hi)
-                alert(error.message)
+                console.log(typeof(localStorage.getItem('myData')))
+                alert(typeof(localStorage.getItem('myData')))
             },
         }
     )
