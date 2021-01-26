@@ -89,7 +89,7 @@ export default function MenuBoard() {
     }, [data]);
 
 
-    return stat === "주문완료" || stat === "주문포기" ? (
+    return status === "주문완료" || status === "주문포기" ? (
         <>
             <AfterOrder/>
         </>
