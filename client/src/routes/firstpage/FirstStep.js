@@ -113,7 +113,7 @@ const AuthenticationForm = () => {
 
     const theme = useTheme();
     const classes = useStyles({theme});
-    const [contents, setContents] = useState();
+    const [setContents] = useState();
 
     const {data} = useQuery(TaskQuery);
 
@@ -135,7 +135,7 @@ const AuthenticationForm = () => {
                 <div className={classes.loginhtml}>
 
 
-                    <h2 className={classes.margin}>👨🏻‍💻{localStorage.getItem('name')}님 환영합니다.👨🏻‍💻️</h2>
+                    <h2 className={classes.margin}>{localStorage.getItem('name')}님 환영합니다.</h2>
 
                     <div className={classes.loginform}>
 

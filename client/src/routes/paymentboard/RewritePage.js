@@ -35,7 +35,7 @@ function RewritePage(props) {
         if (data) {
             setContents(data.tasks);
         }
-    })
+    },[data])
 
     return (
         <CardComponent

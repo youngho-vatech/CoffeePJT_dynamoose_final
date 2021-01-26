@@ -18,7 +18,6 @@ import {
     UserSearchQuery,
     VacationQuery
 } from "./query";
-import React from "react";
 
 //주문 포기=> 재주문 상태로
 export function ChangeGiveup(userid) {

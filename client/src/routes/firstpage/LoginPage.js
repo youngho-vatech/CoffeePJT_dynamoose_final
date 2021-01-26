@@ -122,7 +122,7 @@ const useStyles = createUseStyles((theme) => ({
 ;
 
 const handleClick = (name, id) => {
-    if (id != undefined && id != null) {
+    if (id !== undefined && id !== null) {
         localStorage.setItem('myData', id)
         localStorage.setItem('name', name)
         window.location.href = '/order'
@@ -138,7 +138,7 @@ const AuthenticationForm = () => {
 
     const [search, setSearch] = useState();
     const [result, setResult] = useState([]);
-    const [inputValue, setInputValue] = useState();
+    const [inputValue, setInputValue] = useState("");
     const [tasks, setTasks] = useState();
 
     const {data: task} = useQuery(TaskQuery);

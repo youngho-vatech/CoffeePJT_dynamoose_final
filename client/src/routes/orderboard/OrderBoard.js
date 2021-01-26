@@ -13,7 +13,6 @@ import {useQuery} from "@apollo/react-hooks";
 import {MeQuery} from "../../graphql/query";
 import CreateOrder from "./useBoard";
 import GiveupButton from "../../components/button/GiveupButton";
-import {Column, Row} from "simple-flexbox";
 
 
 const useStyles = makeStyles((theme) => ({

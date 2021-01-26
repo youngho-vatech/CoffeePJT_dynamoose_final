@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import {makeStyles, withStyles} from '@material-ui/core/styles';
 import clsx from 'clsx';
@@ -203,6 +203,8 @@ function getStepContent(step) {
             return <Third/>;
         case 1:
             return <Second/>;
+        default:
+            return <Third/>;
 
     }
 }
