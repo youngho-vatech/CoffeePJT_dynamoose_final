@@ -227,6 +227,7 @@ module.exports = async (cmenu) => {
             }
 
         }
+        console.log(result, "receiptUser")
         return result
     }
 }

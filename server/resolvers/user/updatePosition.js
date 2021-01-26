@@ -9,6 +9,6 @@ module.exports = async (ids) => {
         console.log(result)
         
     }
-    
+    console.log("updatePosition")
     return "휴가자 등록이 완료 되었습니다."
 };

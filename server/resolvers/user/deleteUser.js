@@ -9,6 +9,6 @@ module.exports = async(ids) => {
         await User.delete({_id,dummy})  
     }
     
-    
+    console.log("deleteUser")
     return "유저가 삭제 되었습니다."
 };

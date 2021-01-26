@@ -27,6 +27,6 @@ module.exports = async() => {
         const result = await Task.delete({_id,dummy})
         
     }
-
+    console.log("confirmOrders")
     return "주문이 최종 확정 되었습니다. 맛있게 드세요!"
 };

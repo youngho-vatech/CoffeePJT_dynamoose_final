@@ -20,5 +20,6 @@ module.exports = async() => {
         }
         
     }
+    console.log("howmany")
     return number
 };

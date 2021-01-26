@@ -44,7 +44,7 @@ export default function TestBoard() {
 
     const theme = useTheme();
     const classes = useStyles({theme});
-    const [status, setStatus] = useState();
+    const [stat, setStatus] = useState();
 
 
     const {data} = useQuery(MeQuery, {
@@ -177,7 +177,7 @@ export default function TestBoard() {
 
                 </Grid>
 
-                {status === "대기중" && (
+                {stat === "대기중" && (
                     <GiveupButton userid={localStorage.getItem("myData")}/>
                 )}
 

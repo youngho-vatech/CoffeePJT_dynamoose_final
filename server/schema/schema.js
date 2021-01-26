@@ -75,18 +75,15 @@ const schema = new GraphQLSchema({
         name: 'Query',
         fields: {
             orders: {
-                args: {
-                    hi: { type: new GraphQLNonNull(GraphQLString) }
-                },
                 type: new GraphQLList(orderType),
-                resolve: (parent, args) => orders(args.hi)
+                resolve: (parent, args) => orders()
             },
             orderMine: {
                 args: {
                     _id: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: new GraphQLList(orderType),
-                resolve: (parent, args) => orderMine(args)
+                resolve: (parent, args) => orderMine(args._id)
             },
             howmuch: {
                 type: new GraphQLNonNull(GraphQLInt),
@@ -115,10 +112,10 @@ const schema = new GraphQLSchema({
             },
             me: {
                 args: {
-                    _id: { type: new GraphQLNonNull(GraphQLString) }
+                    userid: { type: new GraphQLNonNull(GraphQLString) }
                 },
                 type: userType,
-                resolve: (parent, args) => me(args._id)
+                resolve: (parent, args) => me(args.userid)
             },
             includedOrdermen: {
                 type: new GraphQLList(userType),
@@ -174,7 +171,7 @@ const schema = new GraphQLSchema({
                     userid: { type: new GraphQLNonNull(GraphQLString) },
                     orderid: { type: new GraphQLNonNull(GraphQLString) }
                 },
-                type: GraphQLString,
+                type: orderType,
                 resolve: (parent, args) => removeOrder(args.userid, args.orderid)
             },
             giveupOrder: {
@@ -209,7 +206,7 @@ const schema = new GraphQLSchema({
                     _id: { type: new GraphQLNonNull(GraphQLString) },
                     userid: { type: new GraphQLNonNull(GraphQLString) },
                 },
-                type: GraphQLString,
+                type: taskType,
                 resolve: (parent, args) => removeTask(args)
             },
             registerUser: {
@@ -233,8 +230,8 @@ const schema = new GraphQLSchema({
                     _id: { type: new GraphQLNonNull(GraphQLString) },
                     username: { type: new GraphQLNonNull(GraphQLString) }
                 },
-                type: GraphQLString,
-                resolve: (parent, args) => updateUser(args.dummy, args._id, args.username)
+                type: userType,
+                resolve: (parent, args) => updateUser(args._id, args.username)
             },
             getbackUser: {
                 args: {

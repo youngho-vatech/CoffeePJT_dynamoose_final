@@ -8,16 +8,18 @@ module.exports = async (data) => {
     const dummy = "유저"
     const user = await User.get({dummy,_id})
     
-    if(user.stat == "주문완료") return null
+    if(user.stat == "주문완료") return "이미 주문 하셨습니다."
     await User.update({"dummy":dummy,"_id":_id,"stat":"주문완료"});
     
     const myOrder = new Order({
+            dummy:"주문",
             menu: data.menu,
             hi: data.hi,
             username: user.username,
             _id: uuid.v1(),
             createdAt: String(Date.now()),
-            dummy:"주문"
         })
-    return await myOrder.save()
+    const result = await myOrder.save()
+    console.log(result, "createOrder")
+    return result
 };

@@ -55,7 +55,7 @@ const useStyles = makeStyles((theme) => ({
 export default function EtcBoard() {
     const classes = useStyles();
     const [contents, setContents] = useState('');
-    const [status, setStatus] = useState();
+    const [stat, setStatus] = useState();
 
     const {data} = useQuery(TaskQuery);
     useEffect(() => {
@@ -190,7 +190,7 @@ export default function EtcBoard() {
                                 </Card>
                             </Paper>
                         </Grid>
-                        {status === "대기중" && (
+                        {stat === "대기중" && (
                             <GiveupButton userid={localStorage.getItem("myData")}/>
                         )}
 

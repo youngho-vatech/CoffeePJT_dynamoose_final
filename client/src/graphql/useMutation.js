@@ -44,12 +44,11 @@ export function ChangeGiveup(userid) {
 
 export function CreateOrder(hi) {
     const createmutation = CreateMutation;
-
-
+    console.log(hi)
     const [create] = useMutation(createmutation, {
             refetchQueries: [{query: OrderSearch, variables: {id: localStorage.getItem('myData')}}
                 , {query: MeQuery, variables: {userid: localStorage.getItem('myData')}},
-                {query: Receipt}, {query: CountQuery}, {query: CountQuery}, {query: NotQuery}],
+                {query: Receipt}, {query: CountQuery}, {query: NotQuery}],
             variables: {
                 id: localStorage.getItem('myData'),
                 menu: hi.menu,

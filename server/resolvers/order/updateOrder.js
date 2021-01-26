@@ -15,5 +15,6 @@ module.exports = async (data) => {
     let menu = data.menu
 
     const result = await Order.update({"_id":_id,"dummy":dummy},{"hi":hi,"menu":menu});
+    console.log(result, "updateOrder")
     return result
 };

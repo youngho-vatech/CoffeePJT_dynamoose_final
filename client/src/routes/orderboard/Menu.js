@@ -69,7 +69,7 @@ const useStyles = makeStyles((theme) => ({
 export default function MenuBoard() {
     const classes = useStyles();
     const [value, setValue] = React.useState('one');
-    const [status, setStatus] = useState();
+    const [stat, setStatus] = useState();
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
@@ -89,7 +89,7 @@ export default function MenuBoard() {
     }, [data]);
 
 
-    return status === "주문완료" || status === "주문포기" ? (
+    return stat === "주문완료" || stat === "주문포기" ? (
         <>
             <AfterOrder/>
         </>

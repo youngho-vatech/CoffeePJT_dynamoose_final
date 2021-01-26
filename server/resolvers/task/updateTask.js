@@ -6,5 +6,6 @@ module.exports = async (data) => {
     let dummy = "게시글"
     let title = data.title
     const result = await Task.update({"_id":_id,"dummy":dummy,"title":title});
+    console.log("updateTask")
     return result
 };

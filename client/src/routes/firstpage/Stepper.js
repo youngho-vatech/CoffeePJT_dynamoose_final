@@ -255,7 +255,7 @@ export default function CustomizedSteppers() {
 
                     </div>
                 </div>
-                )}
+                )
             </div>
         </div>
     ) : (

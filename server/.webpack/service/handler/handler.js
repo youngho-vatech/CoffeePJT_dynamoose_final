@@ -17438,6 +17438,7 @@ module.exports = async () => {
     });
   }
 
+  console.log("confirmOrders");
   return "주문이 최종 확정 되었습니다. 맛있게 드세요!";
 };
 
@@ -17465,21 +17466,23 @@ module.exports = async data => {
     dummy,
     _id
   });
-  if (user.stat == "주문완료") return null;
+  if (user.stat == "주문완료") return "이미 주문 하셨습니다.";
   await User.update({
     "dummy": dummy,
     "_id": _id,
     "stat": "주문완료"
   });
   const myOrder = new Order({
+    dummy: "주문",
     menu: data.menu,
     hi: data.hi,
     username: user.username,
     _id: uuid.v1(),
-    createdAt: String(Date.now()),
-    dummy: "주문"
+    createdAt: String(Date.now())
   });
-  return await myOrder.save();
+  const result = await myOrder.save();
+  console.log(result, "createOrder");
+  return result;
 };
 
 /***/ }),
@@ -17505,7 +17508,7 @@ module.exports = async data => {
     "_id": _id,
     "stat": "주문포기"
   });
-  console.log(result);
+  console.log(result, "giveupOrder");
   return "주문을 포기하셨습니다.";
 };
 
@@ -17523,9 +17526,9 @@ module.exports = async data => {
 const Order = __webpack_require__(/*! ../../model/order */ "./model/order.js");
 
 module.exports = async () => {
-  const orders = await Order.query("dummy").eq("주문");
+  const orders = await Order.query("dummy").eq("주문").exec();
   let sum = 0;
-  console.log(orders);
+  console.log(orders, "howmuch");
 
   for (let i = 0; i < orders.length; i++) {
     if (orders[i].menu === "아메리카노") {
@@ -17573,16 +17576,16 @@ const User = __webpack_require__(/*! ../../model/user */ "./model/user.js");
 
 const Order = __webpack_require__(/*! ../../model/order */ "./model/order.js");
 
-module.exports = async data => {
-  const _id = data._id;
+module.exports = async _id => {
   const dummy = "유저";
   const user = await User.get({
-    _id,
-    dummy
-  }); // const result = await Order.scan({"username":{"contains":user.username}}).exec()
+    dummy,
+    _id
+  });
+  console.log("유저이름", user.username); // const result = await Order.scan({"username":{"contains":user.username}}).exec()
 
   const result = await Order.query("dummy").eq("주문").where("username").eq(user.username).exec();
-  console.log(result);
+  console.log(result, "orderMine");
   return result;
 };
 
@@ -17599,10 +17602,10 @@ module.exports = async data => {
 
 const Order = __webpack_require__(/*! ../../model/order */ "./model/order.js");
 
-module.exports = async hi => {
+module.exports = async () => {
   // const result = await Order.scan({"hi":{"contains":hi}}).exec()
-  const result = await Order.query("dummy").eq("주문").where("hi").eq(hi).using("username_index").exec();
-  console.log(result);
+  const result = await Order.query("dummy").eq("주문").using("username_index").exec();
+  console.log(result, "orders");
   return result;
 };
 
@@ -17696,6 +17699,7 @@ module.exports = async () => {
     }
   }
 
+  console.log("receipt");
   return mention;
 };
 
@@ -17717,17 +17721,18 @@ const User = __webpack_require__(/*! ../../model/user */ "./model/user.js");
 module.exports = async (userid, orderid) => {
   let dummy = "유저";
   await User.update({
-    "_id": userid,
     "dummy": dummy,
+    "_id": userid,
     "stat": "주문취소"
   });
   dummy = "주문";
+  let _id = orderid;
   const result = await Order.delete({
-    orderid,
+    _id,
     dummy
   });
-  console.log(result);
-  return "주문이 삭제 되었습니다.";
+  console.log(result, "removeOrder");
+  return result;
 };
 
 /***/ }),
@@ -17764,6 +17769,7 @@ module.exports = async data => {
     "hi": hi,
     "menu": menu
   });
+  console.log(result, "updateOrder");
   return result;
 };
 
@@ -17788,7 +17794,8 @@ const Order = __webpack_require__(/*! ../../model/order */ "./model/order.js");
 
 module.exports = async data => {
   const isthere = await Task.scan().exec();
-  if (isthere.count != 0) return "이미 진행중인 주문이 있습니다.";
+  console.log(isthere);
+  if (isthere.count != 0) return isthere;
   const _id = data.userid;
   const dummy = "유저";
   const up = await User.update({
@@ -17797,8 +17804,8 @@ module.exports = async data => {
     "posit": "결제자"
   });
   const user = await User.get({
-    _id,
-    dummy
+    dummy,
+    _id
   });
   const creater = user.username;
   const myTask = new Task({
@@ -17808,7 +17815,9 @@ module.exports = async data => {
     _id: uuid.v1(),
     createdAt: String(Date.now())
   });
-  return await myTask.save();
+  console.log("createTask");
+  const result = await myTask.save();
+  return result;
 };
 
 /***/ }),
@@ -17829,7 +17838,7 @@ const User = __webpack_require__(/*! ../../model/user */ "./model/user.js");
 module.exports = async data => {
   let _id = data._id;
   let dummy = "게시글";
-  await Task.delete({
+  const result = await Task.delete({
     _id,
     dummy
   });
@@ -17842,7 +17851,8 @@ module.exports = async data => {
     "posit": "주문자",
     "stat": "대기중"
   });
-  return "게시글이 삭제 되었습니다.";
+  console.log("removeTask");
+  return result;
 };
 
 /***/ }),
@@ -17860,7 +17870,10 @@ const Task = __webpack_require__(/*! ../../model/task */ "./model/task.js");
 
 module.exports = async () => {
   const result = await Task.scan().exec();
+  if (result.length == 0) return null;
   console.log(result);
+  console.log(result.length);
+  console.log("tasks");
   return result;
 };
 
@@ -17886,6 +17899,7 @@ module.exports = async data => {
     "dummy": dummy,
     "title": title
   });
+  console.log("updateTask");
   return result;
 };
 
@@ -17907,7 +17921,9 @@ module.exports = async () => {
   //     username: '양씨',
   //     dummy: '유저'
   //   }
-  return await User.query("dummy").eq("유저").sort().using("username_index").exec();
+  const result = await User.query("dummy").eq("유저").sort().using("username_index").exec();
+  console.log(result, "allUsers");
+  return result;
 };
 
 /***/ }),
@@ -17934,6 +17950,7 @@ module.exports = async ids => {
     });
   }
 
+  console.log("deleteUser");
   return "유저가 삭제 되었습니다.";
 };
 
@@ -17957,7 +17974,7 @@ module.exports = async _id => {
     "_id": _id,
     "stat": "대기중"
   });
-  console.log(result);
+  console.log(result, "getbackStatus");
   return "해당 인원은 주문포기에서 대기중으로 다시 바뀌었습니다.";
 };
 
@@ -17983,7 +18000,7 @@ module.exports = async ids => {
       "_id": _id,
       "posit": "주문자"
     });
-    console.log(result);
+    console.log(result, "getbackUser");
   }
 
   return "해당 인원은 주문자로 다시 바뀌었습니다.";
@@ -18019,6 +18036,7 @@ module.exports = async () => {
     }
   }
 
+  console.log("howmany");
   return number;
 };
 
@@ -18039,7 +18057,7 @@ module.exports = async () => {
   // const result = await User.scan({"posit":{"contains":"주문자"},"stat":{"contains":"대기중"}}).exec()
   // console.log(result)
   const result = await User.query("dummy").eq("유저").where("posit").eq("주문자").and().where("stat").eq("대기중").sort().using("username_index").exec();
-  console.log(result);
+  console.log(result, "includedNothing");
   return result;
 };
 
@@ -18059,7 +18077,7 @@ const User = __webpack_require__(/*! ../../model/user */ "./model/user.js");
 module.exports = async () => {
   // const result = await User.scan({"posit":{"contains":"주문자"}}).using("username_index").exec()
   const result = await User.query("dummy").eq("유저").where("posit").eq("주문자").sort().using("username_index").exec();
-  console.log(result);
+  console.log(result, "includedOrdermen");
   return result;
 };
 
@@ -18079,7 +18097,7 @@ const User = __webpack_require__(/*! ../../model/user */ "./model/user.js");
 module.exports = async () => {
   // const result = await User.scan({"posit":{"contains":"휴가자"}}).exec()
   const result = await User.query("dummy").eq("유저").where("posit").eq("휴가자").sort().using("username_index").exec();
-  console.log(result);
+  console.log(result, "includedVacation");
   return result;
 };
 
@@ -18102,7 +18120,7 @@ module.exports = async _id => {
     dummy,
     _id
   });
-  console.log(result);
+  console.log(result, "me");
   return result;
 };
 
@@ -18313,6 +18331,7 @@ module.exports = async cmenu => {
       }
     }
 
+    console.log(result, "receiptUser");
     return result;
   }
 };
@@ -18341,6 +18360,7 @@ module.exports = async data => {
     _id: uuid.v1(),
     createdAt: String(Date.now())
   });
+  console.log("registerUser");
   return await myUser.save();
 };
 
@@ -18369,6 +18389,7 @@ module.exports = async ids => {
     console.log(result);
   }
 
+  console.log("updatePosition");
   return "휴가자 등록이 완료 되었습니다.";
 };
 
@@ -18398,8 +18419,8 @@ module.exports = async (_id, username) => {
     "_id": _id,
     "username": username
   });
-  console.log(result);
-  return "이름이 변경되었습니다.";
+  console.log(result, "updateUser");
+  return result;
 };
 
 /***/ }),
@@ -18424,7 +18445,7 @@ module.exports = async (word, category) => {
       "contains": word
     }
   }).using("username_index").exec();
-  console.log(result);
+  console.log(result, "user");
   return result; // else {
   //     if (word == "") return null
   //     const result = await User.scan({ "username": { "contains": "주문자" }, "stat": { "contains": "대기중" } }).exec()
@@ -18570,13 +18591,8 @@ const schema = new GraphQLSchema({
     name: 'Query',
     fields: {
       orders: {
-        args: {
-          hi: {
-            type: new GraphQLNonNull(GraphQLString)
-          }
-        },
         type: new GraphQLList(orderType),
-        resolve: (parent, args) => orders(args.hi)
+        resolve: (parent, args) => orders()
       },
       orderMine: {
         args: {
@@ -18585,7 +18601,7 @@ const schema = new GraphQLSchema({
           }
         },
         type: new GraphQLList(orderType),
-        resolve: (parent, args) => orderMine(args)
+        resolve: (parent, args) => orderMine(args._id)
       },
       howmuch: {
         type: new GraphQLNonNull(GraphQLInt),
@@ -18617,12 +18633,12 @@ const schema = new GraphQLSchema({
       },
       me: {
         args: {
-          _id: {
+          userid: {
             type: new GraphQLNonNull(GraphQLString)
           }
         },
         type: userType,
-        resolve: (parent, args) => me(args._id)
+        resolve: (parent, args) => me(args.userid)
       },
       includedOrdermen: {
         type: new GraphQLList(userType),
@@ -18696,7 +18712,7 @@ const schema = new GraphQLSchema({
             type: new GraphQLNonNull(GraphQLString)
           }
         },
-        type: GraphQLString,
+        type: orderType,
         resolve: (parent, args) => removeOrder(args.userid, args.orderid)
       },
       giveupOrder: {
@@ -18745,7 +18761,7 @@ const schema = new GraphQLSchema({
             type: new GraphQLNonNull(GraphQLString)
           }
         },
-        type: GraphQLString,
+        type: taskType,
         resolve: (parent, args) => removeTask(args)
       },
       registerUser: {
@@ -18775,8 +18791,8 @@ const schema = new GraphQLSchema({
             type: new GraphQLNonNull(GraphQLString)
           }
         },
-        type: GraphQLString,
-        resolve: (parent, args) => updateUser(args.dummy, args._id, args.username)
+        type: userType,
+        resolve: (parent, args) => updateUser(args._id, args.username)
       },
       getbackUser: {
         args: {

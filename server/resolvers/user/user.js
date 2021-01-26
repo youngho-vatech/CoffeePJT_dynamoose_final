@@ -6,7 +6,7 @@ module.exports = async (word, category) => {
         if (word == "") return result
         // const result = await User.query("dummy").eq("유저").where("username").contains(word).sort().using("username_index").exec() // 안되네,,
         result = await User.scan({ "username": { "contains": word }}).using("username_index").exec()
-        console.log(result)
+        console.log(result, "user")
         return result
     
     // else {

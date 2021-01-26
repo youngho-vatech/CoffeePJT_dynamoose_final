@@ -105,5 +105,6 @@ module.exports = async () => {
             mention[i] = "플레인 요거트 스무디 : " + orderV[i] + "잔"
         }
     }
+    console.log("receipt")
     return mention
 };

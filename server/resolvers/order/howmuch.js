@@ -2,9 +2,9 @@
 
 const Order = require('../../model/order');
 module.exports = async () => {
-    const orders = await Order.query("dummy").eq("주문");
+    const orders = await Order.query("dummy").eq("주문").exec();
     let sum = 0
-    console.log(orders)
+    console.log(orders, "howmuch")
     for (let i = 0; i < orders.length; i++) {
         if (orders[i].menu === "아메리카노") {
 

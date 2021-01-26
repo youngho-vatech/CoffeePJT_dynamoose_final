@@ -44,7 +44,7 @@ export default function CorderBoard() {
 
     const theme = useTheme();
     const classes = useStyles({theme});
-    const [status, setStatus] = useState();
+    const [stat, setStatus] = useState();
 
 
     const {data} = useQuery(MeQuery, {
@@ -56,6 +56,7 @@ export default function CorderBoard() {
 
     useEffect(() => {
         if (data) {
+            console.log(data.me.stat)
             setStatus(data.me.stat);
         }
     }, [data]);
@@ -177,7 +178,7 @@ export default function CorderBoard() {
 
                 </Grid>
 
-                {status === "대기중" && (
+                {stat === "대기중" && (
                     <GiveupButton userid={localStorage.getItem("myData")}/>
                 )}
 

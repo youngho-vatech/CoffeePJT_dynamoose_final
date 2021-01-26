@@ -12,6 +12,6 @@ module.exports = async(data) => {
         _id: uuid.v1(),
         createdAt: String(Date.now())
     })
-    
+    console.log("registerUser")
     return await myUser.save()
 };

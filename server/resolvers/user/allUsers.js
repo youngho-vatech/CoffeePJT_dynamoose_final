@@ -7,6 +7,8 @@ module.exports = async() => {
     //     username: '양씨',
     //     dummy: '유저'
     //   }
-    return await User.query("dummy").eq("유저").sort().using("username_index").exec()
+    const result = await User.query("dummy").eq("유저").sort().using("username_index").exec()
+    console.log(result,"allUsers")
+    return result
 }
     
