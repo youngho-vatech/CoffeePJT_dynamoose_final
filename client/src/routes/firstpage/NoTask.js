@@ -176,7 +176,7 @@ const AuthenticationForm = () => {
 
     const [search, setSearch] = useState();
     const [result, setResult] = useState([]);
-    const [inputValue, setInputValue] = useState();
+    const [inputValue, setInputValue] = useState("");
 
     const {data} = useQuery(SearchQuery, {
         variables: {

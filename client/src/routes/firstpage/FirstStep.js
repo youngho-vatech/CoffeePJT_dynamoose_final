@@ -17,7 +17,7 @@ const useStyles = createUseStyles((theme) => ({
             maxWidth: "525px",
             minHeight: "670px",
             position: "relative",
-            left:"15%",
+            left: "15%",
             marginTop: "-20px"
         },
         loginhtml: {
@@ -113,7 +113,7 @@ const AuthenticationForm = () => {
 
     const theme = useTheme();
     const classes = useStyles({theme});
-    const [setContents] = useState();
+    const [contents, setContents] = useState();
 
     const {data} = useQuery(TaskQuery);
 
