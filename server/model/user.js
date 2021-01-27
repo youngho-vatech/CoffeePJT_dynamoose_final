@@ -18,13 +18,13 @@ const User = dynamoose.model('test00_users', {
             "throughput": {"read": 5, "write": 5}
         },
         "index": {
-            "name": "stat_index",
-            "rangeKey": "stat",
+            "name": "status_index",
+            "rangeKey": "status",
             "throughput": {"read": 5, "write": 5}
         },
         "index": {
-            "name": "posit_index",
-            "rangeKey": "posit",
+            "name": "position_index",
+            "rangeKey": "position",
             "throughput": {"read": 5, "write": 5}
         }
     },
@@ -34,8 +34,8 @@ const User = dynamoose.model('test00_users', {
     },
     createdAt:String,
     username: String,
-    stat: String,
-    posit:String
+    status: String,
+    position:String
   });
     
 

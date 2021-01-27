@@ -6,7 +6,7 @@ module.exports = async (data) => {
     let _id = data.userid
     let dummy = "유저"
     
-    await User.update({"_id":_id,"dummy":dummy,"stat":"주문완료"});
+    await User.update({"_id":_id,"dummy":dummy,"status":"주문완료"});
     
 
     _id = data.orderid;

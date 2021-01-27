@@ -41,30 +41,30 @@ const receiptUser = require('../resolvers/user/receiptUser');
 const userType = new GraphQLObjectType({
     name: 'User',
     fields: {
-        _id: { type: new GraphQLNonNull(GraphQLString) },
-        username: { type: new GraphQLNonNull(GraphQLString) },
-        stat: { type: new GraphQLNonNull(GraphQLString) },
-        posit: { type: new GraphQLNonNull(GraphQLString) },
-        createdAt: { type: new GraphQLNonNull(GraphQLString) },
+        _id: { type: GraphQLString },
+        username: { type:GraphQLString },
+        status: { type:GraphQLString },
+        position: { type:GraphQLString },
+        createdAt: { type:GraphQLString },
     }
 });
 const taskType = new GraphQLObjectType({
     name: 'Task',
     fields: {
-        _id: { type: new GraphQLNonNull(GraphQLString) },
-        creater: { type: new GraphQLNonNull(GraphQLString) },
-        title: { type: new GraphQLNonNull(GraphQLString) },
-        createdAt: { type: new GraphQLNonNull(GraphQLString) },
+        _id: {type: GraphQLString },
+        creater: { type:GraphQLString },
+        title: { type:GraphQLString },
+        createdAt: { type:GraphQLString },
     }
 });
 const orderType = new GraphQLObjectType({
     name: 'Order',
     fields: {
-        _id: { type: new GraphQLNonNull(GraphQLString) },
-        menu: { type: new GraphQLNonNull(GraphQLString) },
-        hi: { type: new GraphQLNonNull(GraphQLString) },
-        username: { type: new GraphQLNonNull(GraphQLString) },
-        createdAt: { type: new GraphQLNonNull(GraphQLString) },
+        _id: { type:GraphQLString },
+        menu: { type:GraphQLString },
+        hi: { type:GraphQLString },
+        username: { type:GraphQLString },
+        createdAt: { type:GraphQLString },
     }
 });
 

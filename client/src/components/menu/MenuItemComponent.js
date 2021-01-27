@@ -34,7 +34,7 @@ const useStyles = createUseStyles({
 function MenuItemComponent({children, id, items = [], level = 1, onClick, title}) {
     const theme = useTheme();
     const isCollapsible = children && children.length > 0;
-    const {isActive, onItemClick} = useSidebar({
+    const {isExpanded, isActive, onItemClick} = useSidebar({
         isCollapsible,
         item: id,
         items

@@ -4,10 +4,7 @@ import gql from 'graphql-tag';
 export const UserSearchQuery = gql`
     query {
         allUsers{
-            _id 
-            posit
-            username
-            stat
+            _id, position,username, status
         }
     }
 `;
@@ -18,8 +15,8 @@ export const MeQuery = gql`
     query me($userid:String!) {
         me(userid:$userid){
             username
-            posit
-            stat
+            position
+            status
         }
     }
 
@@ -70,8 +67,8 @@ export const SearchQuery = gql`
         user(word:$word category:1){
             _id
             username
-            stat
-            posit
+            status
+            position
         }
     }
 
@@ -85,8 +82,8 @@ export const USearchQuery = gql`
         user(word:$word category:2){
             _id
             username
-            stat
-            posit
+            status
+            position
         }
     }
 
@@ -99,8 +96,8 @@ export const AllUserQuery = gql`
         allUsers{
             _id
             username
-            posit
-            stat
+            position
+            status
         }
     }
 `

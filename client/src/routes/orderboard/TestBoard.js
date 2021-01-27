@@ -56,7 +56,7 @@ export default function TestBoard() {
 
     useEffect(() => {
         if (data) {
-            setStatus(data.me.stat);
+            setStatus(data.me.status);
         }
     }, [data]);
 
@@ -177,7 +177,7 @@ export default function TestBoard() {
 
                 </Grid>
 
-                {stat === "대기중" && (
+                {status === "대기중" && (
                     <GiveupButton userid={localStorage.getItem("myData")}/>
                 )}
 

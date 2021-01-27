@@ -35,7 +35,7 @@ function BoardTable() {
             setUser(String(Object.values(data)))
         }
 
-    },[receipt,data])
+    })
 
 
     return (

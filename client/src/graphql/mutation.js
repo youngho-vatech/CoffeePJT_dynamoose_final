@@ -37,6 +37,18 @@ export const TaskCreateMutation = gql`
 
 `
 
+
+export const TaskUpdateMutation = gql`
+    mutation updateTask($id:String! $title:String!){
+        updateTask(_id:$id, title:$title){
+            _id
+            creater
+            title
+        }
+    }
+
+`
+
 //Task Update
 
 export const UpdateUserMutation = gql`
@@ -51,7 +63,7 @@ export const UpdateUserMutation = gql`
 
 //Task Remove
 export const TaskRemoveMutation = gql`
-    mutation removeTask($id:String!,$userid:String!){
+    mutation removeTask($id:String!,$userid:ID!){
         removeTask(_id:$id,userid:$userid){
             _id
             creater

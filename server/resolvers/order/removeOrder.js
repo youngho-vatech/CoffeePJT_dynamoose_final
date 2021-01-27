@@ -5,7 +5,7 @@ const User = require('../../model/user');
 module.exports = async (userid, orderid) => {
     
     let dummy = "유저"
-    await User.update({"dummy":dummy,"_id":userid,"stat":"주문취소"});
+    await User.update({"dummy":dummy,"_id":userid,"status":"주문취소"});
     
     dummy="주문"
     let _id= orderid

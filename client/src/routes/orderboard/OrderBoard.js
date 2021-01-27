@@ -37,6 +37,9 @@ const useStyles = makeStyles((theme) => ({
         paddingLeft: 30,
         paddingRight: 30
     },
+    media: {
+        cursor: "default"
+    }
 }));
 
 export default function CorderBoard() {
@@ -51,11 +54,11 @@ export default function CorderBoard() {
             userid: localStorage.getItem('myData')
         }
     });
-    console.log(data)
+
 
     useEffect(() => {
         if (data) {
-            setStatus(data.me.stat);
+            setStatus(data.me.status);
         }
     }, [data]);
 
@@ -65,7 +68,7 @@ export default function CorderBoard() {
         <div className={classes.root}>
 
             <Grid container spacing={3} flexGrow={1} horizontal='center'
-            breakpoints={{300:classes.itemContainerMobile}}>
+                  breakpoints={{300: classes.itemContainerMobile}}>
 
                 <Grid item xs={3} flexGrow={3}
                       flexBasis='350px'>
@@ -76,10 +79,11 @@ export default function CorderBoard() {
                                 <CardMedia
                                     component="img"
                                     height="200"
+                                    className={classes.media}
                                     image="https://images.unsplash.com/photo-1593231269103-6667d6905882?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=1001&q=80"
                                     title="아메리카노"
                                 />
-                                <CardContent>
+                                <CardContent className={classes.media}>
                                     <Typography gutterBottom variant="h5" component="h2">
                                         아메리카노
                                     </Typography>
@@ -101,15 +105,13 @@ export default function CorderBoard() {
                                 <CardMedia
                                     component="img"
                                     height="200"
+                                    className={classes.media}
                                     image="https://images.unsplash.com/photo-1556484245-2c765becb8eb?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80"
                                     title="카페라떼"
                                 />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
+                                <CardContent className={classes.media}>
+                                    <Typography gutterBottom variant="h5" component="h2" className={classes.media}>
                                         카페라떼
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -129,15 +131,13 @@ export default function CorderBoard() {
                                     component="img"
                                     alt="바닐라라떼"
                                     height="200"
+                                    className={classes.media}
                                     image="https://images.unsplash.com/photo-1570968915860-54d5c301fa9f?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=975&q=80"
                                     title="바닐라라떼"
                                 />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
+                                <CardContent className={classes.media}>
+                                    <Typography gutterBottom variant="h5" component="h2" className={classes.media}>
                                         바닐라라떼
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>
@@ -155,15 +155,13 @@ export default function CorderBoard() {
                                 <CardMedia
                                     component="img"
                                     alt="카페 모카"
+                                    className={classes.media}
                                     height="200"
                                     image="https://images.unsplash.com/photo-1523247140972-52cc3cdd2715?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=934&q=80"
                                 />
-                                <CardContent>
-                                    <Typography gutterBottom variant="h5" component="h2">
+                                <CardContent className={classes.media}>
+                                    <Typography gutterBottom variant="h5" component="h2" className={classes.media}>
                                         카페 모카
-                                    </Typography>
-                                    <Typography variant="body2" color="textSecondary" component="p">
-
                                     </Typography>
                                 </CardContent>
                             </CardActionArea>

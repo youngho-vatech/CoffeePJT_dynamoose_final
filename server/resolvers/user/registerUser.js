@@ -7,8 +7,8 @@ module.exports = async(data) => {
     const myUser = new User({
         dummy:"유저",
         username: data.username,
-        stat: "대기중",
-        posit: "주문자",
+        status: "대기중",
+        position: "주문자",
         _id: String(uuid.v1()),
         createdAt: String(Date.now())
     })

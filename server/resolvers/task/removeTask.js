@@ -12,7 +12,7 @@ module.exports = async(data) => {
     _id = data.userid
     dummy = "유저"
     
-    await User.update({"_id":_id,"dummy":dummy},{"posit":"주문자","stat":"대기중"})
+    await User.update({"_id":_id,"dummy":dummy},{"position":"주문자","status":"대기중"})
     console.log("removeTask")
 
     return result

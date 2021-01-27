@@ -6,6 +6,7 @@ import {convertlinksToUrl} from 'resources/utilities';
 import LogoComponent from './LogoComponent';
 import Menu from './MenuComponent';
 import MenuItem from './MenuItemComponent';
+import {useAuthToken} from '../../routes/firstpage/authToken';
 import {useQuery} from '@apollo/react-hooks';
 import {MeQuery} from "../../graphql/query";
 
@@ -28,6 +29,7 @@ const handleClick = () => {
 
 
 function SidebarComponent() {
+    const [_, removeAuthToken] = useAuthToken();
 
     const {push} = useHistory();
     const theme = useTheme();
@@ -46,7 +48,7 @@ function SidebarComponent() {
 
     useEffect(() => {
         if (data) {
-            setUser(data.me.posit);
+            setUser(data.me.position);
 
         }
     }, [data]);

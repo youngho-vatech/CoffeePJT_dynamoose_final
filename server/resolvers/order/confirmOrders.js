@@ -17,7 +17,7 @@ module.exports = async() => {
     for (let i = 0; i < users.length; i++) {
         let _id = users[i]._id
         let dummy = "유저"
-        const result = await User.update({"_id":_id,"dummy":dummy},{"posit":"주문자","stat":"대기중"})
+        const result = await User.update({"_id":_id,"dummy":dummy},{"position":"주문자","status":"대기중"})
         
     }
 

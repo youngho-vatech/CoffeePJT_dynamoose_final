@@ -60,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
         fontSize: 10,
         color:"black",
         marginLeft: "23px",
-        width: "1079px",
+        width: "1235px",
         height: "50px",
         marginBottom: "-24px"
     }
@@ -84,7 +84,7 @@ export default function MenuBoard() {
 
     useEffect(() => {
         if (data) {
-            setStatus(data.me.stat);
+            setStatus(data.me.status);
         }
     }, [data]);
 

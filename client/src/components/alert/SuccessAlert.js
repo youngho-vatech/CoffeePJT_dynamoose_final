@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Alert from '@material-ui/lab/Alert';
 import IconButton from '@material-ui/core/IconButton';
@@ -22,7 +22,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function SuccessAlert({message, button}) {
     const classes = useStyles();
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = React.useState(true);
 
     return (
         <>
@@ -58,7 +58,5 @@ export default function SuccessAlert({message, button}) {
                 {button}
             </Button>
         </>
-
-
     );
 }

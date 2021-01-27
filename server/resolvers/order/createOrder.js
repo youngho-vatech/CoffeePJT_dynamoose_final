@@ -7,9 +7,9 @@ module.exports = async (data) => {
     const _id = data._id
     const dummy = "유저"
     const user = await User.get({dummy,_id})
-    
-    if(user.stat == "주문완료") return "이미 주문 하셨습니다."
-    await User.update({"dummy":dummy,"_id":_id,"stat":"주문완료"});
+    console.log(user)
+    if(user.status == "주문완료") return "이미 주문 하셨습니다."
+    await User.update({"dummy":dummy,"_id":_id,"status":"주문완료"});
     
     const myOrder = new Order({
             dummy:"주문",

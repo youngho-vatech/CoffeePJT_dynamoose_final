@@ -11,7 +11,7 @@ module.exports = async (data) => {
     const _id = data.userid
     const dummy = "유저"
 
-    const up = await User.update({"_id":_id,"dummy":dummy,"posit":"결제자"});
+    const up = await User.update({"_id":_id,"dummy":dummy,"position":"결제자"});
     
     const user = await User.get({ dummy, _id })
     const creater = user.username

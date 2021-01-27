@@ -33,7 +33,7 @@ function BoardTable() {
 
     useEffect(() => {
         if (me) {
-            setStatus(me.me.stat);
+            setStatus(me.me.status);
 
         }
     }, [me]);

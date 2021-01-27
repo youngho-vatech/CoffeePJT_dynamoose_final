@@ -122,8 +122,8 @@ const useStyles = createUseStyles((theme) => ({
 ;
 
 const handleClick = (name, id) => {
-    if (id !== undefined && id !== null) {
-        localStorage.setItem('myData', id)
+    if (id != undefined && id != null) {
+        localStorage.setItem('myData', id.toString())
         localStorage.setItem('name', name)
         window.location.href = '/order'
     }
@@ -138,7 +138,7 @@ const AuthenticationForm = () => {
 
     const [search, setSearch] = useState();
     const [result, setResult] = useState([]);
-    const [inputValue, setInputValue] = useState("");
+    const [inputValue, setInputValue] = useState();
     const [tasks, setTasks] = useState();
 
     const {data: task} = useQuery(TaskQuery);
@@ -198,23 +198,15 @@ const AuthenticationForm = () => {
                                             margin="normal"
                                             color={"secondary"}
                                             onChange={e => setSearch(e.target.value)}
-                                            onKeyPress={() => {
-                                                const listener = event => {
-                                                    if (event.code === "Enter") {
-                                                        handleClick(search, result.map((content) => (content._id)))
-
-                                                    }
-                                                };
-                                                document.addEventListener("keypress", listener);
-                                                return () => {
-                                                    document.removeEventListener("keypress", listener);
-                                                };
-
-                                            }}
                                             InputProps={{
                                                 ...params.InputProps,
                                                 type: 'search',
                                                 className: classes.focused
+                                            }}
+                                            onKeyDown={({key}) => {
+                                                if (key === "Enter") {
+                                                    handleClick(inputValue, result.map((content) => (content._id)))
+                                                }
                                             }}
                                         />
                                     )}

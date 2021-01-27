@@ -10,6 +10,7 @@ import {CookiesProvider} from 'react-cookie';
 import {setContext} from '@apollo/client/link/context';
 import './index.css';
 
+
 const httpLink = createHttpLink({
     uri: 'http://localhost:4000/dev/graphql'
 });

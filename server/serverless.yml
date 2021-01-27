@@ -56,9 +56,9 @@ resources:
                 AttributeType: S
               - AttributeName: createdAt
                 AttributeType: S
-              - AttributeName: stat
+              - AttributeName: status
                 AttributeType: S
-              - AttributeName: posit
+              - AttributeName: position
                 AttributeType: S
               - AttributeName: username
                 AttributeType: S
@@ -83,17 +83,17 @@ resources:
                   KeyType: HASH
                 - AttributeName: username
                   KeyType: RANGE
-              - IndexName: stat_index
+              - IndexName: status_index
                 KeySchema:
                 - AttributeName: dummy
                   KeyType: HASH
-                - AttributeName: stat
+                - AttributeName: status
                   KeyType: RANGE
-              - IndexName: posit_index
+              - IndexName: position_index
                 KeySchema:
                 - AttributeName: dummy
                   KeyType: HASH
-                - AttributeName: posit
+                - AttributeName: position
                   KeyType: RANGE  
             ProjectionType: ALL
         OrderGqlDynamoDbTable:

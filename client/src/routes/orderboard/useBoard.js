@@ -7,21 +7,18 @@ import Button from "@material-ui/core/Button";
 export function CreateOrder(hi) {
 
     const createmutation = CreateMutation;
-    
+
     const [create] = useMutation(createmutation, {
-            refetchQueries: [{query: OrderSearch, variables: {id: String(localStorage.getItem('myData'))}}
-                , {query: MeQuery, variables: {userid: String(localStorage.getItem('myData'))}},
-                {query: Receipt}, {query: CountQuery}, {query: CostQuery}, {query: NotQuery}],
+            refetchQueries: [{query: OrderSearch, variables: {id: localStorage.getItem('myData')}}
+                , {query: MeQuery, variables: {userid: localStorage.getItem('myData')}},
+                {query: Receipt}, {query: CostQuery}, {query: CountQuery}, {query: NotQuery}],
             variables: {
-                id: String(localStorage.getItem('myData')),
+                id: localStorage.getItem('myData'),
                 menu: hi.menu,
                 hi: hi.hi
             },
-            onCompleted: () => {
-            },
-            onError: (error) => {
-                console.log(typeof(localStorage.getItem('myData')))
-                alert(typeof(localStorage.getItem('myData')))
+            onError: () => {
+                alert("메뉴를 선택해주세요.")
             },
         }
     )
