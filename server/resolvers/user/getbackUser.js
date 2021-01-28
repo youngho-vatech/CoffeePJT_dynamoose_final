@@ -5,7 +5,7 @@ module.exports =  async(ids) => {
     for (let i = 0; i < ids.length; i++) {
         const _id = ids[i]
         const dummy = "유저"
-        const result = await User.update({"dummy":dummy,"_id":_id,"position":"주문자"});
+        const result = await User.update({"dummy":dummy,"_id":_id,"position":"주문자","status":"대기중"});
         console.log(result, "getbackUser")
     }
     
