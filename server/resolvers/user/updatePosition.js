@@ -10,6 +10,7 @@ module.exports = async (ids) => {
         const getUser = await User.get({"dummy":dummy,"_id":_id})
         
         if(getUser.status == "주문완료"){
+            const st = await User.update({"dummy":dummy,"_id":_id,"status":"대기중"})
             const updated = await Order.query("dummy").eq("주문").where("username").eq(getUser.username).exec()
             if(updated){
                 dummy = "주문"
